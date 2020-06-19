@@ -1,0 +1,28 @@
+<div lang="en">
+	<form>
+		<input type="text" class="instr" ng-model="instruction" placeholder="Move the top right block to the center.">
+		<input type="submit" class="button">
+	</form>
+	<canvas id="renderCanvas"></canvas>
+
+	<div class="right">
+		<h3>Block Control</h3>
+		<button class="button">Reset</button>
+		<button class="button">Shuffle</button><br>
+		<input class="checkbox" type="checkbox"> <span>Use Custom Block Locations</span><br>
+		<div class="blocks">
+			<block-list list="block_objects">
+			</block-list>
+			<div class="block-card">
+				<label class="x-y-z-label" for="x">x:</label><input type="text" id="x2" name="x"><br>
+				<svg class="block-card-action">
+					<line x1="10" y1="3" x2="10" y2="17" style="stroke: #35A133; stroke-width: 1px;"></line>
+					<line x1="3" y1="10" x2="17" y2="10" style="stroke: #35A133; stroke-width: 1px;"></line>
+				</svg>
+				<label class="x-y-z-label" for="y">y:</label><input type="text" id="y2" name="y"><br>
+				<label class="x-y-z-label" for="z">z:</label><input type="text" id="z2" name="z"><br>
+			</div>
+		</div>
+	</div>
+	<script src="assets/js/block-control.js"></script>
+</div>

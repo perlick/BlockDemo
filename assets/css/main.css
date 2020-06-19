@@ -1,0 +1,78 @@
+body {
+    overflow: hidden;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  form {
+    margin-bottom: 45px;
+  }
+
+  .instr {
+    width: calc(100% - 120px);
+    height: 44px;
+    border-color: #c4c4c4;
+    border-style: solid;
+    border-radius: 4px;
+    font-size: 18px;
+    text-indent: 10px;
+  }
+
+  .button {
+    height: 50px;
+    width: 100px;
+    color: white;
+    background-color: #2A6496;
+    border-style: solid;
+    border-color: #2A6496;
+    border-radius: 4px;
+    font-size: 18px;
+  }
+
+  #renderCanvas {
+    width: 60%;
+    height: 40vw;
+    touch-action: none;
+  }
+
+  .right {
+    float: right;
+    width: 35%;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 0px;
+  }
+
+  .checkbox {
+    margin-top: 15px;
+  }
+
+  .block-card {
+    width: max-content;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    margin-top: 15px;
+    padding: 15px;
+  }
+
+  .x-y-z-label {
+    margin-right: 5px;
+    clear: left;
+  }
+
+  .block-card-action {
+    width: 20px;
+    height: 20px;
+    float: right;
+    cursor: pointer;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    margin-left: 15px;
+  }
