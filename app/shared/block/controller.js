@@ -2,11 +2,7 @@ function blockCtrl() {
 	var ctrl = this;
 
 	ctrl.delete = function () {
-		ctrl.onDelete({ hero: ctrl.hero });
-	};
-
-	ctrl.update = function (prop, value) {
-		ctrl.onUpdate({ block: ctrl.hero, prop: prop, value: value });
+		ctrl.onDelete({ block: ctrl.block });
 	};
 }
 
@@ -15,7 +11,6 @@ angular.module('app.home').component('block', {
 	controller: blockCtrl,
 	bindings: {
 		block: '=',
-		onDelete: '&',
-		onUpdate: '&'
+		onDelete: '&'
 	}
 });

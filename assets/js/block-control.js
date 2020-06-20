@@ -1,3 +1,11 @@
+//color for each side of the blocks
+var Colors = [new BABYLON.Color4(0.98, 0.9, 0.05),
+	new BABYLON.Color4(0.98, 0.9, 0.05),
+	new BABYLON.Color4(0.98, 0.9, 0.05),
+	new BABYLON.Color4(0.98, 0.9, 0.05),
+	new BABYLON.Color4(0.98, 0.9, 0.05),
+	new BABYLON.Color4(0.98, 0.9, 0.05)];
+
 //setup ground, camera, lighting
 var createScene = function (engine) {
 	// Create a basic BJS Scene object.
@@ -33,13 +41,6 @@ var getRandomBlocks = function () {
 //adds block locations to scene
 var addBlocksToScene = function (block_locations, scene) {
 	var block_objects = {};
-	//color for each side of the blocks
-	var Colors = [new BABYLON.Color4(0.98, 0.9, 0.05),
-	new BABYLON.Color4(0.98, 0.9, 0.05),
-	new BABYLON.Color4(0.98, 0.9, 0.05),
-	new BABYLON.Color4(0.98, 0.9, 0.05),
-	new BABYLON.Color4(0.98, 0.9, 0.05),
-	new BABYLON.Color4(0.98, 0.9, 0.05)];
 
 	//add each block to scene
 	for (block in block_locations) {
@@ -50,4 +51,10 @@ var addBlocksToScene = function (block_locations, scene) {
 	}
 
 	return block_objects;
+}
+
+var newBlock = function (name, scene) {
+	block = BABYLON.MeshBuilder.CreateBox(name, { size: 0.16, faceColors: Colors }, scene);
+	block.position.y = 0.08;
+	return block;
 }

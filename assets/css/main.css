@@ -1,5 +1,4 @@
 body {
-    overflow: hidden;
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 5%;
@@ -25,6 +24,7 @@ body {
     height: 50px;
     width: 100px;
     color: white;
+    cursor: pointer;
     background-color: #2A6496;
     border-style: solid;
     border-color: #2A6496;

@@ -13,6 +13,11 @@ angular.module('app.home', ['ngRoute'])
 	$scope.instruction = "";
 	$scope.block_objects = {};
 
+	$scope.createBlock = function () {
+		var name = 'block' + $scope.block_objects.length;
+		$scope.block_objects[name] = newBlock(name, $scope.scene);
+	}
+
 	//write functions for reset and shuffle buttons
 
 	$scope.$on('$viewContentLoaded', function (event) {
@@ -24,6 +29,7 @@ angular.module('app.home', ['ngRoute'])
 		var block_locations = getRandomBlocks();
 		var block_objects = addBlocksToScene(block_locations, scene);
 
+		event.currentScope.scene = scene;
 		event.currentScope.block_objects = block_objects;
 
 		engine.runRenderLoop(function () {
