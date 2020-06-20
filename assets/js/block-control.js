@@ -29,32 +29,32 @@ var createScene = function (engine) {
 //cretes random locations for blocks - does not add to scene
 var getRandomBlocks = function () {
 	var i;
-	var block_locations = {};
-	for (i = 0; i < 10; i++) {
+	var block_locations = [];
+	for (i = 0; i < 3; i++) {
 		x = Math.random() * 2 - 1;
 		z = Math.random() * 2 - 1;
-		block_locations['block' + i] = { 'x': x, 'y': 0.08, 'z': z };
+		block_locations.push({ 'x': x, 'y': 0.08, 'z': z });
 	}
 	return block_locations;
 }
 
 //adds block locations to scene
 var addBlocksToScene = function (block_locations, scene) {
-	var block_objects = {};
+	var block_objects = [];
 
 	//add each block to scene
-	for (block in block_locations) {
-		block_objects[block] = BABYLON.MeshBuilder.CreateBox(block, { size: 0.16, faceColors: Colors }, scene);
-		block_objects[block].position.x = block_locations[block].x;
-		block_objects[block].position.y = block_locations[block].y;
-		block_objects[block].position.z = block_locations[block].z;
-	}
+	block_locations.forEach(block => {
+		block_objects.push(BABYLON.MeshBuilder.CreateBox('block', { size: 0.16, faceColors: Colors }, scene));
+		block_objects[block_objects.length - 1].position.x = block.x;
+		block_objects[block_objects.length - 1].position.y = block.y;
+		block_objects[block_objects.length - 1].position.z = block.z;
+	});
 
 	return block_objects;
 }
 
-var newBlock = function (name, scene) {
-	block = BABYLON.MeshBuilder.CreateBox(name, { size: 0.16, faceColors: Colors }, scene);
+var newBlock = function (scene) {
+	block = BABYLON.MeshBuilder.CreateBox('block', { size: 0.16, faceColors: Colors }, scene);
 	block.position.y = 0.08;
 	return block;
 }

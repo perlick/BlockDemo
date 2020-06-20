@@ -7,8 +7,8 @@
 
 	<div class="right">
 		<h3>Block Control</h3>
-		<button class="button">Reset</button>
-		<button class="button">Shuffle</button><br>
+		<button class="button" ng-click="reset()">Reset</button>
+		<button class="button" ng-click="shuffle()">Shuffle</button><br>
 		<input class="checkbox" type="checkbox"> <span>Use Custom Block Locations</span><br>
 		<div class="blocks">
 			<block-list list="block_objects">
