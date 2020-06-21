@@ -9,8 +9,8 @@
 		<h3>Block Control</h3>
 		<button class="button" ng-click="reset()">Reset</button>
 		<button class="button" ng-click="shuffle()">Shuffle</button><br>
-		<input class="checkbox" type="checkbox"> <span>Use Custom Block Locations</span><br>
-		<div class="blocks">
+		<input class="checkbox" type="checkbox" ng-change="toggleBlockCards()" ng-model="checkSelect"> <span>Use Custom Block Locations</span><br>
+		<div class="blocks" ng-show='blockListVis'>
 			<block-list list="block_objects">
 			</block-list>
 			<div class="block-card">

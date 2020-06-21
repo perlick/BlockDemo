@@ -44,6 +44,13 @@ angular.module('app.home', ['ngRoute'])
 		});
 	}
 
+	$scope.toggleBlockCards = function () {
+		if ($scope.checkSelect == true)
+			$scope.blockListVis = true;
+		else
+			$scope.blockListVis = false;
+	}
+
 	$scope.createBlock = function () {
 		$scope.block_objects.push(newBlock($scope.scene));
 	}
