@@ -37,6 +37,7 @@ angular.module('app.home', ['ngRoute'])
 		//get new block locations and update scope block_objects.
 		//Stange behavior here. see reset() above
 		var block_locations = getRandomBlocks();
+		var block_locations = fixAllBlockLocations(block_locations);
 		var block_objects = addBlocksToScene(block_locations, $scope.scene);
 		$scope.block_locations_original = block_locations;
 		block_objects.forEach(block => {
@@ -62,6 +63,7 @@ angular.module('app.home', ['ngRoute'])
 
 		var scene = createScene(engine);
 		var block_locations = getRandomBlocks();
+		var block_locations = fixAllBlockLocations(block_locations);
 		var block_objects = addBlocksToScene(block_locations, scene);
 
 		event.currentScope.scene = scene;
