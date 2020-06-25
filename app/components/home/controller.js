@@ -13,6 +13,41 @@ angular.module('app.home', ['ngRoute'])
 	$scope.instruction = "";
 	$scope.block_objects = [];
 
+	$scope.submit = function () {
+		var dataset = [];
+		$scope.block_locations_original.forEach(block => {
+			dataset.push(Object.values(block));
+		});
+		$.ajax({
+			type: "POST",
+			url: "http://127.0.0.1:8080/",
+			datatype: 'json',
+			contentType: 'application/json;charset=UTF-8',
+			data: JSON.stringify({
+				sent: $scope.instruction,
+				dataset: dataset
+			}),
+			success: function(msg){
+				console.log(msg);
+				//clear all blocks from scene
+				for (var i = $scope.block_objects.length - 1; i >= 0; i--) {
+					$scope.block_objects[i].dispose(); //remove block from babylon scene
+					$scope.block_objects.splice(i, 1); //delete block from block_objects
+				}
+				//get new block locations and update scope block_objects
+				var block_locations = [];
+				msg.forEach(block => {
+					block_locations.push({x: block[0], y: block[1], z: block[2]});
+				});
+				console.log(block_locations);
+				var block_locations = fixAllBlockLocations(block_locations);
+				var block_objects = addBlocksToScene(block_locations, $scope.scene);
+				block_objects.forEach(block => {
+					$scope.block_objects.push(block);
+				});
+			}});
+	}
+
 	$scope.reset = function () {
 		//clear all blocks from scene
 		for (var i = $scope.block_objects.length-1; i>=0; i--) {

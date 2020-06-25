@@ -11,10 +11,7 @@
 </head>
 
 <body ng-app="app">
-	<ul class="menu">
-		<li><a href="#!/home">Home</a></li>
-		<li><a href="#!/examples">Examples</a></li>
-	</ul>
+	<nav></nav>
 
 	<div ng-view></div>
 	<script src="assets/libs/jquery/jquery.js"></script>
@@ -22,6 +19,7 @@
 	<script src="assets/libs/angularjs/angular-route.js"></script>
 	<script src="app/app.module.js"></script>
 	<!-- <script src="app/app.routes.js"></script> -->
+	<script src="app/shared/nav/controller.js"></script>
 	<script src="app/components/home/controller.js"></script>
 	<script src="app/components/examples/controller.js"></script>
 	<script src="app/shared/blockList/controller.js"></script>

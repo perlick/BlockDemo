@@ -1,6 +1,6 @@
 <div lang="en">
-	<form>
-		<input type="text" class="instr" ng-model="instruction" placeholder="Move the top right block to the center.">
+	<form ng-submit="submit()">
+		<input type="text" class="instr" ng-model="instruction" name="instr" placeholder="Move the top right block to the center.">
 		<input type="submit" class="button">
 	</form>
 	<canvas id="renderCanvas"></canvas>

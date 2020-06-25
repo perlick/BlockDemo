@@ -33,7 +33,7 @@ var createScene = function (engine) {
 var getRandomBlocks = function () {
 	var i;
 	var block_locations = [];
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < 20; i++) {
 		x = Math.random() * 2 - 1;
 		z = Math.random() * 2 - 1;
 		block_locations.push({ 'x': x, 'y': 0.08, 'z': z });
