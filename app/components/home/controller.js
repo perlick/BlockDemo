@@ -15,8 +15,8 @@ angular.module('app.home', ['ngRoute'])
 
 	$scope.submit = function () {
 		var dataset = [];
-		$scope.block_locations_original.forEach(block => {
-			dataset.push(Object.values(block));
+		$scope.block_objects.forEach(block => {
+			dataset.push([block.position.x, block.position.y, block.position.z]);
 		});
 		$.ajax({
 			type: "POST",
@@ -28,7 +28,6 @@ angular.module('app.home', ['ngRoute'])
 				dataset: dataset
 			}),
 			success: function(msg){
-				console.log(msg);
 				//clear all blocks from scene
 				for (var i = $scope.block_objects.length - 1; i >= 0; i--) {
 					$scope.block_objects[i].dispose(); //remove block from babylon scene
@@ -39,7 +38,6 @@ angular.module('app.home', ['ngRoute'])
 				msg.forEach(block => {
 					block_locations.push({x: block[0], y: block[1], z: block[2]});
 				});
-				console.log(block_locations);
 				var block_locations = fixAllBlockLocations(block_locations);
 				var block_objects = addBlocksToScene(block_locations, $scope.scene);
 				block_objects.forEach(block => {
