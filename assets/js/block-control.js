@@ -25,18 +25,39 @@ var createScene = function (engine) {
 	var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(-1, 5, -2), scene);
 	// Create a built-in "ground" shape.
 	var ground = BABYLON.MeshBuilder.CreateGround('ground1', { height: 2.5, width: 2.5, subdivisions: 2 }, scene);
+	var mat = new BABYLON.StandardMaterial("mat", scene);
+	mat.diffuseColor = BABYLON.Color3.Red();
+	mat.alpha = 0.8;
 	// Return the created scene.
 	return scene;
 }
 
+//used in place of pythons random.sample(pop, k) method
+function getRandomSubarray(arr, size) {
+	var shuffled = arr.slice(0), i = arr.length, temp, index;
+	while (i--) {
+		index = Math.floor((i + 1) * Math.random());
+		temp = shuffled[index];
+		shuffled[index] = shuffled[i];
+		shuffled[i] = temp;
+	}
+	return shuffled.slice(0, size);
+}
+
+
 //cretes random locations for blocks - does not add to scene
 var getRandomBlocks = function () {
 	var i;
-	var block_locations = [];
-	for (i = 0; i < 20; i++) {
-		x = Math.random() * 2 - 1;
-		z = Math.random() * 2 - 1;
-		block_locations.push({ 'x': x, 'y': 0.08, 'z': z });
+	var block_locations = [], x = [], z = [];
+	cent = 10;
+	points = [-0.8, -0.64, -0.48, -0.32, -0.16, 0, 0.16, 0.32, 0.48, 0.64, 0.8];
+	x = getRandomSubarray(points, cent);
+	z = getRandomSubarray(points, cent);
+	for (i = 0; i < cent; i++) {
+		block_locations.push({ 'x': x[i], 'y': 0.08, 'z': z[i] });
+	}
+	for (i = 0; i < 20 - cent; i++) {
+		block_locations.push({ 'x': -2, 'y': 1, 'z': -2 });
 	}
 	return block_locations;
 }
