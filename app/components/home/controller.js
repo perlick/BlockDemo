@@ -85,7 +85,35 @@ angular.module('app.home', ['ngRoute'])
 			$scope.blockListVis = false;
 	}
 
+	$scope.existsFiller = function () {
+		var exists = false;
+		for(var i = 0; i < $scope.block_objects.length; i++){
+			if($scope.block_objects[i].position.x == -1
+				&& $scope.block_objects[i].position.y == -1
+				&& $scope.block_objects[i].position.z == -1) {
+					exists = true;
+				}
+		}
+		return exists;
+	}
+
 	$scope.createBlock = function () {
+		//find any filler block
+		var filler_block;
+		$scope.block_objects.forEach(block => {
+			if(block.position.x == -1
+				&& block.position.y == -1
+				&& block.position.z == -1) {
+					filler_block = block;
+				}
+		});
+		filler_block.dispose(); //remove filler block from babylon scene
+		//delete block from block_objects
+		var idx = $scope.block_objects.indexOf(filler_block);
+		if (idx >= 0) {
+			$scope.block_objects.splice(idx, 1);
+		}
+		//create and add new block
 		$scope.block_objects.push(newBlock($scope.scene));
 	}
 

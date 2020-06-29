@@ -1,4 +1,4 @@
-<div class="block-card">
+<div class="block-card" ng-style="{display: $ctrl.block.position.x == -1 && $ctrl.block.position.y == -1 && $ctrl.block.position.z == -1 ? 'none' : 'block'}">
 	<svg class="block-card-action" ng-click="$ctrl.delete();">
 		<line x1="5" y1="5" x2="15" y2="15" style="stroke: #A13333; stroke-width: 1px;"></line>
 		<line x1="15" y1="5" x2="5" y2="15" style="stroke: #A13333; stroke-width: 1px;"></line>

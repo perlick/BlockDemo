@@ -13,7 +13,7 @@
 		<div class="blocks" ng-show='blockListVis'>
 			<block-list list="block_objects">
 			</block-list>
-			<div class="block-card">
+			<div class="block-card" ng-style="{display: existsFiller() ? 'block' : 'none'}">
 				<svg class="block-card-action" ng-click="createBlock()">
 					<line x1="10" y1="3" x2="10" y2="17" style="stroke: #35A133; stroke-width: 1px;"></line>
 					<line x1="3" y1="10" x2="17" y2="10" style="stroke: #35A133; stroke-width: 1px;"></line>
