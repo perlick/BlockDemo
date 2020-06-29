@@ -57,7 +57,7 @@ var getRandomBlocks = function () {
 		block_locations.push({ 'x': x[i], 'y': 0.08, 'z': z[i] });
 	}
 	for (i = 0; i < 20 - cent; i++) {
-		block_locations.push({ 'x': -2, 'y': 1, 'z': -2 });
+		block_locations.push({ 'x': -1, 'y': -1, 'z': -1 });
 	}
 	return block_locations;
 }
@@ -110,6 +110,11 @@ var addBlocksToScene = function (block_locations, scene) {
 		block_objects[block_objects.length - 1].position.x = block.x;
 		block_objects[block_objects.length - 1].position.y = block.y;
 		block_objects[block_objects.length - 1].position.z = block.z;
+		if (block_objects[block_objects.length - 1].position.x == -1
+			&& block_objects[block_objects.length - 1].position.y == -1
+			&& block_objects[block_objects.length - 1].position.z == -1) {
+			block_objects[block_objects.length - 1].visibility = 0;
+		}
 	});
 
 	return block_objects;
