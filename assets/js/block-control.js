@@ -25,9 +25,8 @@ var createScene = function (engine) {
 	var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(-1, 5, -2), scene);
 	// Create a built-in "ground" shape.
 	var ground = BABYLON.MeshBuilder.CreateGround('ground1', { height: 2.5, width: 2.5, subdivisions: 2 }, scene);
-	var mat = new BABYLON.StandardMaterial("mat", scene);
-	mat.diffuseColor = BABYLON.Color3.Red();
-	mat.alpha = 0.8;
+	var grid = new BABYLON.StandardMaterial("grid", scene);
+	grid.ambientTexture = new BABYLON.Texture("assets/img/grid.png", scene);
 	// Return the created scene.
 	return scene;
 }

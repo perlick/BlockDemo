@@ -79,10 +79,14 @@ angular.module('app.home', ['ngRoute'])
 	}
 
 	$scope.toggleBlockCards = function () {
-		if ($scope.checkSelect == true)
+		if ($scope.checkSelect == true) {
 			$scope.blockListVis = true;
-		else
+			//also put the grid on the board
+			$scope.scene.getMeshByName('ground1').material = $scope.scene.getMaterialByName('grid');
+		} else {
 			$scope.blockListVis = false;
+			$scope.scene.getMeshByName('ground1').material = null;
+		}
 	}
 
 	$scope.existsFiller = function () {
