@@ -27,6 +27,12 @@ var createScene = function (engine) {
 	var ground = BABYLON.MeshBuilder.CreateGround('ground1', { height: 2.5, width: 2.5, subdivisions: 2 }, scene);
 	var grid = new BABYLON.StandardMaterial("grid", scene);
 	grid.ambientTexture = new BABYLON.Texture("assets/img/grid.png", scene);
+	//add source and target marker materials
+	var source = new BABYLON.StandardMaterial("source", scene);
+	source.ambientTexture = new BABYLON.Texture("assets/img/source.png", scene);
+	source.alpha = 0.5;
+	var target = new BABYLON.StandardMaterial("target", scene);
+	target.ambientTexture = new BABYLON.Texture("assets/img/target.png", scene);
 	// Return the created scene.
 	return scene;
 }
@@ -84,7 +90,6 @@ var fixBlockClip = function (block1, block_locations) {
 				block1.y == block2.y) {
 			return; //functions the same as a continue statement
 		}
-		//if (block1.intersectsMesh(block2, false, false)) {
 		if (Math.abs(block1.x - block2.x) < 0.159 &&
 				Math.abs(block1.z - block2.z) < 0.159 &&
 				Math.abs(block1.y - block2.y) < 0.159) { // for some reason, 0.08 - 0.24 = -0.159999 not -0.16
@@ -109,10 +114,13 @@ var addBlocksToScene = function (block_locations, scene) {
 		block_objects[block_objects.length - 1].position.x = block.x;
 		block_objects[block_objects.length - 1].position.y = block.y;
 		block_objects[block_objects.length - 1].position.z = block.z;
-		if (block_objects[block_objects.length - 1].position.x == -1
-			&& block_objects[block_objects.length - 1].position.y == -1
-			&& block_objects[block_objects.length - 1].position.z == -1) {
+		if(block_objects[block_objects.length - 1].position.x == -1
+		&& block_objects[block_objects.length - 1].position.y == -1
+		&& block_objects[block_objects.length - 1].position.z == -1) {
 			block_objects[block_objects.length - 1].visibility = 0;
+		}
+		if ("tag" in block && block.tag == "target"){
+			block_objects[block_objects.length - 1].material = scene.getMaterialByName("target");
 		}
 	});
 

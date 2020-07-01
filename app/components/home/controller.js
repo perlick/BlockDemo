@@ -28,15 +28,50 @@ angular.module('app.home', ['ngRoute'])
 				dataset: dataset
 			}),
 			success: function(msg){
-				//clear all blocks from scene
+				//annotate blocks with 'source', 'target', or 'unmoved'
+				var source_block;
+				dataset.forEach(block_old => {
+					var moved = true;
+					msg.forEach(block_new => {
+						if(block_old[0] == block_new[0]
+						&& block_old[1] == block_new[1]
+						&& block_old[2] == block_new[2]) {
+							moved = false;
+							block_new[3] = "unmoved";
+							block_old[3] = "unmoved";
+						}
+					});
+					if(moved){
+						source_block = block_old;
+						block_old[3] = "source";
+					}
+				});
+				msg.forEach(block_new => {
+					if(block_new.length < 4){
+						block_new[3] = "target";
+					}
+				});
+				//clear all current blocks from scene
 				for (var i = $scope.block_objects.length - 1; i >= 0; i--) {
 					$scope.block_objects[i].dispose(); //remove block from babylon scene
 					$scope.block_objects.splice(i, 1); //delete block from block_objects
 				}
+				//get rid of any extra blocks not included in block_objects
+				$scope.scene.meshes.forEach(mesh => {
+					if(mesh.name != 'ground1'){
+						mesh.dispose();
+					}
+				});
+				//create a new block to show movement
+				var source_marker = newBlock();
+				source_marker.position.x = source_block[0];
+				source_marker.position.y = source_block[1];
+				source_marker.position.z = source_block[2];
+				source_marker.material = $scope.scene.getMaterialByName('source');
 				//get new block locations and update scope block_objects
 				var block_locations = [];
 				msg.forEach(block => {
-					block_locations.push({x: block[0], y: block[1], z: block[2]});
+					block_locations.push({x: block[0], y: block[1], z: block[2], tag: block[3]});
 				});
 				var block_locations = fixAllBlockLocations(block_locations);
 				var block_objects = addBlocksToScene(block_locations, $scope.scene);
@@ -52,6 +87,12 @@ angular.module('app.home', ['ngRoute'])
 			$scope.block_objects[i].dispose(); //remove block from babylon scene
 			$scope.block_objects.splice(i, 1); //delete block from block_objects
 		}
+		//get rid of any extra blocks not included in block_objects
+		$scope.scene.meshes.forEach(mesh => {
+			if (mesh.name != 'ground1') {
+				mesh.dispose();
+			}
+		});
 		//create blocks at original locations and update scope block_objects.
 		//Stange behavior here. Updating $scope.block_objects = addBlocksToScene()
 		//does create the block cards in the DOM. but, adding them one at a time does.
@@ -67,6 +108,12 @@ angular.module('app.home', ['ngRoute'])
 			$scope.block_objects[i].dispose(); //remove block from babylon scene
 			$scope.block_objects.splice(i, 1); //delete block from block_objects
 		}
+		//get rid of any extra blocks not included in block_objects
+		$scope.scene.meshes.forEach(mesh => {
+			if (mesh.name != 'ground1') {
+				mesh.dispose();
+			}
+		});
 		//get new block locations and update scope block_objects.
 		//Stange behavior here. see reset() above
 		var block_locations = getRandomBlocks();
