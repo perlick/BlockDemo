@@ -20,7 +20,7 @@ angular.module('app.home', ['ngRoute'])
 		});
 		$.ajax({
 			type: "POST",
-			url: "http://127.0.0.1:8080/",
+			url: "/model",
 			datatype: 'json',
 			contentType: 'application/json;charset=UTF-8',
 			data: JSON.stringify({
