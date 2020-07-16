@@ -75,6 +75,8 @@ angular.module('app.home', ['ngRoute'])
 				});
 				var block_locations = fixAllBlockLocations(block_locations);
 				var block_objects = addBlocksToScene(block_locations, $scope.scene);
+
+				$scope.$parent.block_locations = block_locations;
 				block_objects.forEach(block => {
 					$scope.block_objects.push(block);
 				});
@@ -97,6 +99,7 @@ angular.module('app.home', ['ngRoute'])
 		//Stange behavior here. Updating $scope.block_objects = addBlocksToScene()
 		//does create the block cards in the DOM. but, adding them one at a time does.
 		var block_objects = addBlocksToScene($scope.block_locations_original, $scope.scene);
+		$scope.$parent.block_locations = $scope.block_locations_original;
 		block_objects.forEach(block => {
 			$scope.block_objects.push(block);
 		});
@@ -119,7 +122,8 @@ angular.module('app.home', ['ngRoute'])
 		var block_locations = getRandomBlocks();
 		var block_locations = fixAllBlockLocations(block_locations);
 		var block_objects = addBlocksToScene(block_locations, $scope.scene);
-		$scope.block_locations_original = block_locations;
+		$scope.$parent.block_locations_original = block_locations;
+		$scope.$parent.block_locations = block_locations;
 		block_objects.forEach(block => {
 			$scope.block_objects.push(block);
 		});
@@ -169,17 +173,12 @@ angular.module('app.home', ['ngRoute'])
 	}
 
 	$scope.$on('$viewContentLoaded', function (event) {
-		// setup canvas every time this view is loaded
 		var canvas = document.getElementById('renderCanvas');
 		var engine = new BABYLON.Engine(canvas, true);
-
 		var scene = createScene(engine);
-		var block_locations = getRandomBlocks();
-		var block_locations = fixAllBlockLocations(block_locations);
-		var block_objects = addBlocksToScene(block_locations, scene);
+		var block_objects = addBlocksToScene($scope.$parent.block_locations, scene);
 
 		event.currentScope.scene = scene;
-		event.currentScope.block_locations_original = block_locations;
 		event.currentScope.block_objects = block_objects;
 
 		engine.runRenderLoop(function () {
