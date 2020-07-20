@@ -1,3 +1,9 @@
+html {
+	height: 101vh; 
+	/* Makes sure scrollbar is always present. 
+	Prevents weird width changes when toggling custom block locations */
+}
+
 body {
 	margin-left: 5%;
 	margin-right: 5%;
@@ -75,6 +81,75 @@ h3 {
 	font-weight: bold;
 	margin-bottom: 15px;
 	margin-top: 0px;
+}
+ 
+.selected-preset {
+	display: inline-block;
+	vertical-align: top;
+	min-height: 109px;
+}
+
+.selected-preset:hover {
+	background-color: #ffffff !important;
+	cursor: default !important;
+}
+
+.preset-list {
+	position: absolute;
+	background-color: #ffffff;
+	border: 2px solid #c4c4c4;
+	border-radius: 4px;
+	padding-left: 8px; 
+	padding-right: 8px;
+	padding-bottom: 8px;
+}
+
+.preset-card {
+	cursor: pointer;
+	margin-top: 8px;
+	width: 280px;
+	border: 1px solid #c4c4c4;
+	border-radius: 4px;
+}
+
+.preset-card:hover {
+	background-color: #61a8e6;
+}
+
+.preset-card p {
+	display: inline-block;
+	vertical-align: top;
+	width: 138px;
+	height: 100px;
+	margin-left: 4px;
+	margin-top: 4px;
+	margin-bottom: 0px;
+}
+
+.preset-card img {
+	display: inline-block;
+	margin-left: 4px;
+	margin-top: 4px;
+	height: 100px;
+	width: 125px;
+}
+
+.preset-button-container {
+	display: inline-block;
+}
+
+.preset-button-container > :first-child {
+	border: 1px solid #35A133;
+}
+
+.preset-button {
+	cursor: pointer;
+	display: block;
+	margin-top: 8px;
+	width: 40px;
+	height: 50px;
+	border: 1px solid #c4c4c4;
+	border-radius: 4px;
 }
 
 .checkbox {

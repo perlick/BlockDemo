@@ -12,6 +12,7 @@ angular.module('app.home', ['ngRoute'])
 .controller('homeCtrl', function ($scope) {
 	$scope.instruction = "";
 	$scope.block_objects = [];
+	$scope.presetListVis = false;
 
 	$scope.submit = function () {
 		var dataset = [];
@@ -172,6 +173,44 @@ angular.module('app.home', ['ngRoute'])
 		$scope.block_objects.push(newBlock($scope.scene));
 	}
 
+	$scope.togglePresetList = function () {
+		if ($scope.presetListVis == false) {
+			$scope.presetListVis = true;
+		} else {
+			$scope.presetListVis = false;
+		}
+	}
+
+	$scope.setPreset = function () {
+		var dataset = document.getElementById("selectedPreset").dataset;
+		if (typeof dataset.instruction == 'undefined') {
+			alert("Please choose a preset from the drop-down list.");
+			return;
+		}
+		//clear all blocks from scene
+		for (var i = $scope.block_objects.length - 1; i >= 0; i--) {
+			$scope.block_objects[i].dispose(); //remove block from babylon scene
+			$scope.block_objects.splice(i, 1); //delete block from block_objects
+		}
+		//get rid of any extra blocks not included in block_objects
+		$scope.scene.meshes.forEach(mesh => {
+			if (mesh.name != 'ground1') {
+				mesh.dispose();
+			}
+		});
+
+		var locations = JSON.parse(dataset.blockcords);
+		$scope.block_locations_original = locations;
+		$scope.block_locations = locations;
+
+		var block_objects = addBlocksToScene($scope.block_locations, $scope.scene);
+		block_objects.forEach(block => {
+			$scope.block_objects.push(block);
+		});
+
+		$scope.instruction = dataset.instruction;
+	}
+
 	$scope.$on('$viewContentLoaded', function (event) {
 		var canvas = document.getElementById('renderCanvas');
 		var engine = new BABYLON.Engine(canvas, true);
@@ -190,3 +229,11 @@ angular.module('app.home', ['ngRoute'])
 		});
 	});
 });
+
+function selectPreset(el) {
+	var old = document.getElementById("selectedPreset");
+	var new_elem = el.cloneNode(true);
+	new_elem.classList.add("selected-preset");
+	new_elem.id = "selectedPreset";
+	old.parentNode.replaceChild(new_elem, old);
+}
