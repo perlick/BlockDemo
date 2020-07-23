@@ -21,7 +21,7 @@ angular.module('app.home', ['ngRoute'])
 		});
 		$.ajax({
 			type: "POST",
-			url: "/model",
+			url: "./model",
 			datatype: 'json',
 			contentType: 'application/json;charset=UTF-8',
 			data: JSON.stringify({
