@@ -99,8 +99,8 @@ angular.module('app.home', ['ngRoute'])
 		//create blocks at original locations and update scope block_objects.
 		//Stange behavior here. Updating $scope.block_objects = addBlocksToScene()
 		//does create the block cards in the DOM. but, adding them one at a time does.
-		var block_objects = addBlocksToScene($scope.block_locations_original, $scope.scene);
-		$scope.$parent.block_locations = $scope.block_locations_original;
+		var block_objects = addBlocksToScene($scope.$parent.block_locations_original, $scope.scene);
+		$scope.$parent.block_locations = $scope.$parent.block_locations_original;
 		block_objects.forEach(block => {
 			$scope.block_objects.push(block);
 		});
@@ -181,12 +181,8 @@ angular.module('app.home', ['ngRoute'])
 		}
 	}
 
-	$scope.setPreset = function () {
-		var dataset = document.getElementById("selectedPreset").dataset;
-		if (typeof dataset.instruction == 'undefined') {
-			alert("Please choose a preset from the drop-down list.");
-			return;
-		}
+	$scope.selectPreset = function ($event) {
+		var dataset = $event.currentTarget.dataset;
 		//clear all blocks from scene
 		for (var i = $scope.block_objects.length - 1; i >= 0; i--) {
 			$scope.block_objects[i].dispose(); //remove block from babylon scene
@@ -198,10 +194,10 @@ angular.module('app.home', ['ngRoute'])
 				mesh.dispose();
 			}
 		});
-
 		var locations = JSON.parse(dataset.blockcords);
-		$scope.block_locations_original = locations;
-		$scope.block_locations = locations;
+		$scope.$parent.block_locations_original = locations;
+		$scope.$parent.block_locations = locations;
+		$scope.$parent.block_locations = locations;
 
 		var block_objects = addBlocksToScene($scope.block_locations, $scope.scene);
 		block_objects.forEach(block => {
@@ -229,11 +225,3 @@ angular.module('app.home', ['ngRoute'])
 		});
 	});
 });
-
-function selectPreset(el) {
-	var old = document.getElementById("selectedPreset");
-	var new_elem = el.cloneNode(true);
-	new_elem.classList.add("selected-preset");
-	new_elem.id = "selectedPreset";
-	old.parentNode.replaceChild(new_elem, old);
-}

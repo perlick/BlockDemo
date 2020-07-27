@@ -11,14 +11,14 @@ var createScene = function (engine) {
 	// Create a basic BJS Scene object.
 	var scene = new BABYLON.Scene(engine);
 	// Create a FreeCamera, and set its position to (x:0, y:5, z:-10).
-	var camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 2.5, -2.5), scene);
+	var camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 2, -2.5), scene);
 	// Target the camera to scene origin.
 	camera.setTarget(BABYLON.Vector3.Zero());
 	// Attach the camera to the canvas. - don't do this to prevent movement
 	// get the canvas DOM element
 	var canvas = document.getElementById('renderCanvas');
-	camera.attachControl(canvas, false);
-	camera.speed = camera.speed/4;
+	//camera.attachControl(canvas, false);
+	//camera.speed = camera.speed/4;
 	//set scene ambient color to green
 	scene.clearColor = new BABYLON.Color3(0.2, 0.56, 0.08);
 	// Create a basic light, aiming 0,1,0 - meaning, to the sky.

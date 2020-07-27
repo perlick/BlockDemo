@@ -2,8 +2,7 @@
 
 var app = angular.module("app", [
 	'ngRoute',
-	'app.home',
-	'app.examples'
+	'app.home'
 ])
 .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
 	$locationProvider.hashPrefix('!');
@@ -11,7 +10,7 @@ var app = angular.module("app", [
 }])
 .controller('appCtrl', ['$scope', function ($scope) {
 	var block_locations = getRandomBlocks();
-	var block_locations = fixAllBlockLocations(block_locations);
+	block_locations = fixAllBlockLocations(block_locations);
 
 	//this always stores the current board config. 
 	//Used to recover locations after leaving home tab

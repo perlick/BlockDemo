@@ -1,159 +1,80 @@
-html {
-	height: 101vh; 
-	/* Makes sure scrollbar is always present. 
-	Prevents weird width changes when toggling custom block locations */
-}
-
 body {
-	margin-left: 5%;
-	margin-right: 5%;
-	font-size: 18px;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-ul.menu {
-	border-bottom: 1px solid #c4c4c4;
-}
-
-.menu > li {
-	display: inline-block;
-	padding-top: 8px;
-	padding-bottom: 8px;
-	padding-left: 16px;
-	padding-right: 16px;
-	border: 1px solid transparent;
-	margin-bottom: -1px;
-}
-
-.menu > li > a {
-	color: black;
-	text-decoration: unset;
-}
-
-.menu > li.selected {
-	border-top: 1px solid #c4c4c4;
-	border-left: 1px solid #c4c4c4;
-	border-top-left-radius: 4px;
-	border-right: 1px solid #c4c4c4;
-	border-top-right-radius: 4px;
-	border-bottom: 1px solid white;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	max-width: 1280px;
+	margin: auto;
 }
 
 form {
-	margin-bottom: 45px;
+	margin-bottom: 20px;
 }
 
 .instr {
-	width: calc(100% - 120px);
-	height: 44px;
-	border-color: #c4c4c4;
-	border-style: solid;
+	border: 2px solid #c4c4c4;
 	border-radius: 4px;
-	font-size: 18px;
-	text-indent: 10px;
+	width: calc(100% - 79.5px);
+	min-width: 240px;
+	height: 25px;
 }
 
-.button {
-	height: 50px;
-	width: 100px;
-	color: white;
+.btn-submit {
 	cursor: pointer;
-	background-color: #2A6496;
+	float: right;
+	width: min-content;
 	border-style: solid;
-	border-color: #2A6496;
 	border-radius: 4px;
-	font-size: 18px;
+	border-color: #428BCA;
+	background-color: #428BCA;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	color: #ffffff;
 }
 
-#renderCanvas {
-	width: 60%;
-	height: 40vw;
-	touch-action: none;
+.btn-blue {
+	cursor: pointer;
+	border-style: solid;
+	border-radius: 4px;
+	border-color: #428BCA;
+	background-color: #428BCA;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	color: #ffffff;
+}
+
+.btn-white {
+	cursor: pointer;
+	border-style: solid;
+	border-radius: 4px;
+	border: 1px solid #c4c4c4;
+	background-color: #ffffff;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+canvas {
+	display: inline-block;
+	min-width: 320px;
+	width: calc(100% - 320px);
 }
 
 .right {
-	float: right;
-	width: 35%;
-}
-
-h3 {
-	font-size: 24px;
-	font-weight: bold;
-	margin-bottom: 15px;
-	margin-top: 0px;
-}
- 
-.selected-preset {
 	display: inline-block;
 	vertical-align: top;
-	min-height: 109px;
+	justify-content: left;
+	min-width: 257px;
+	padding-left: 10px;
 }
 
-.selected-preset:hover {
-	background-color: #ffffff !important;
-	cursor: default !important;
-}
-
-.preset-list {
-	position: absolute;
-	background-color: #ffffff;
-	border: 2px solid #c4c4c4;
-	border-radius: 4px;
-	padding-left: 8px; 
-	padding-right: 8px;
-	padding-bottom: 8px;
-}
-
-.preset-card {
-	cursor: pointer;
-	margin-top: 8px;
-	width: 280px;
-	border: 1px solid #c4c4c4;
-	border-radius: 4px;
-}
-
-.preset-card:hover {
-	background-color: #61a8e6;
-}
-
-.preset-card p {
-	display: inline-block;
-	vertical-align: top;
-	width: 138px;
-	height: 100px;
-	margin-left: 4px;
-	margin-top: 4px;
-	margin-bottom: 0px;
-}
-
-.preset-card img {
-	display: inline-block;
-	margin-left: 4px;
-	margin-top: 4px;
-	height: 100px;
-	width: 125px;
-}
-
-.preset-button-container {
-	display: inline-block;
-}
-
-.preset-button-container > :first-child {
-	border: 1px solid #35A133;
-}
-
-.preset-button {
-	cursor: pointer;
-	display: block;
-	margin-top: 8px;
-	width: 40px;
-	height: 50px;
-	border: 1px solid #c4c4c4;
-	border-radius: 4px;
-}
-
-.checkbox {
-	margin-top: 15px;
+h4 {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .block-card {
@@ -180,8 +101,40 @@ h3 {
 	margin-top: 10px
 }
 
-.example-img {
-	width: 65%;
-	border: 1px solid #c4c4c4;
+.preset-list {
+	position: absolute;
+	box-shadow: 2px 2px 4px #c4c4c4;
+	background-color: #ffffff;
+	border: 2px solid #c4c4c4;
 	border-radius: 4px;
+	padding-left: 8px; 
+	padding-right: 8px;
+	padding-bottom: 8px;
+}
+
+.preset-card {
+	cursor: pointer;
+	margin-top: 5px;
+	width: 235px;
+	height: 70px;
+}
+
+.preset-card:hover {
+	background-color: #c7c7c7;
+}
+
+.preset-card p {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	width: 130px;
+	height: 70px;
+	font-size: 14px;
+}
+
+.preset-card img {
+	display: inline-block;
+	height: 70px;
+	width: 100px;
 }

@@ -1,65 +1,49 @@
-<div lang="en">
-	<form ng-submit="submit()">
-		<input type="text" class="instr" ng-model="instruction" name="instr" placeholder="Move the top right block to the center.">
-		<input type="submit" class="button">
-	</form>
-	<canvas id="renderCanvas"></canvas>
+<p>Please enter an instruction below to move a block on the board.</p>
+<form ng-submit="submit()">
+	<input type="submit" class="btn-submit">
+	<input type="text" class="instr" ng-model="instruction" name="instr" placeholder="Move the top right block to the center.">
+</form>
+<canvas id="renderCanvas"></canvas>
+<div class="right">
+	<h4>Block Control</h4>
+	<button class="btn-blue" ng-click="reset()">Reset</button>
+	<button class="btn-blue" ng-click="shuffle()">Shuffle</button>
+	<button class="btn-white" ng-click="togglePresetList()">Examples <i class="fas fa-caret-down"></i></button><br>
 
-	<div class="right">
-
-		<h3>Presets</h3>
-		<div class="preset-card selected-preset" id="selectedPreset">
-		</div>
-
-		<div class="preset-button-container">
-			<svg class="preset-button" ng-click="setPreset()">
-				<line x1="10" y1="25" x2="15" y2="30" style="stroke: #35A133; stroke-width: 2px;"></line>
-				<line x1="15" y1="30" x2="30" y2="15" style="stroke: #35A133; stroke-width: 2px;"></line>
-			</svg>
-			<svg class="preset-button" ng-click="togglePresetList()">
-				<line x1="10" y1="20" x2="20" y2="30" style="stroke: #c4c4c4; stroke-width: 2px;"></line>
-				<line x1="20" y1="30" x2="30" y2="20" style="stroke: #c4c4c4; stroke-width: 2px;"></line>
-			</svg>
-		</div>
-
-		<div class="preset-list" ng-show="presetListVis">
-			<div class="preset-card" onclick="selectPreset(this)" ng-click="togglePresetList();"
+	<div class="preset-list" ng-show="presetListVis">
+		<div class="preset-card" ng-click="togglePresetList(); selectPreset($event);"
 				data-instruction="move the top right block to the bottom left"
 				data-blockCords='[{"x":-1, "y":0.08, "z":-1},
 								  {"x":-1, "y":0.08, "z":1},
 								  {"x":1, "y":0.08, "z":-1},
 								  {"x":1, "y":0.08, "z":1},
-								  {"x":-1, "y":0.08, "z":-1},
 								  {"x":0, "y":0.08, "z":0},
 								  {"x":0, "y":0.08, "z":-1},
 								  {"x":-1, "y":0.08, "z":0},
 								  {"x":0, "y":0.08, "z":1},
 								  {"x":1, "y":0.08, "z":0},
-								  {"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1}]'>
-				<img src="assets/img/source.png">
-				<p>Move the top right block to the bottom left</p>
-			</div>
-			<div class="preset-card" onclick="selectPreset(this)" ng-click="togglePresetList();">
-				<img src="assets/img/source.png">
-				<p>Move the middle block to the left</p>
-			</div>
+								  {"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1},{"x":-1, "y":-1, "z":-1}]'>
+			<img src="assets/img/example_1.png">
+			<p>Move the top right block to the bottom left corner. </p>
 		</div>
+		<div class="preset-card">
+			<img src="assets/img/source.png">
+			<p>Move the middle block to the left</p>
+		</div>
+	</div>
 
-		<h3>Block Control</h3>
-		<button class="button" ng-click="reset()">Reset</button>
-		<button class="button" ng-click="shuffle()">Shuffle</button><br>
-		<input class="checkbox" type="checkbox" ng-change="toggleBlockCards()" ng-model="checkSelect"> <span>Use Custom Block Locations</span><br>
-		<div class="blocks" ng-show='blockListVis'>
-			<block-list list="block_objects">
-			</block-list>
-			<div class="block-card" ng-style="{display: existsFiller() ? 'block' : 'none'}">
-				<svg class="block-card-action" ng-click="createBlock()">
-					<line x1="10" y1="3" x2="10" y2="17" style="stroke: #35A133; stroke-width: 1px;"></line>
-					<line x1="3" y1="10" x2="17" y2="10" style="stroke: #35A133; stroke-width: 1px;"></line>
-				</svg>
-				<label class="x-y-z-label" for="x">x:</label><input type="text" id="x2" name="x"><br>
-				<label class="x-y-z-label" for="z">z:</label><input type="text" id="z2" name="z"><br>
-			</div>
+	<input type="checkbox" ng-change="toggleBlockCards()" ng-model="checkSelect"><span>Use Custom Block Locations</span><br>
+
+	<div ng-show='blockListVis'>
+		<block-list list="block_objects">
+		</block-list>
+		<div class="block-card" ng-style="{display: existsFiller() ? 'block' : 'none'}">
+			<svg class="block-card-action" ng-click="createBlock()">
+				<line x1="10" y1="3" x2="10" y2="17" style="stroke: #35A133; stroke-width: 1px;"></line>
+				<line x1="3" y1="10" x2="17" y2="10" style="stroke: #35A133; stroke-width: 1px;"></line>
+			</svg>
+			<label class="x-y-z-label" for="x">x:</label><input type="text" id="x2" name="x"><br>
+			<label class="x-y-z-label" for="z">z:</label><input type="text" id="z2" name="z"><br>
 		</div>
 	</div>
 </div>
