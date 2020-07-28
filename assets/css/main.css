@@ -13,15 +13,17 @@ form {
 .instr {
 	border: 2px solid #c4c4c4;
 	border-radius: 4px;
-	width: calc(100% - 79.5px);
+	width: calc(100% - 88.5px);
 	min-width: 240px;
 	height: 25px;
+	padding-left: 12px;
 }
 
 .btn-submit {
 	cursor: pointer;
 	float: right;
 	width: min-content;
+	border-width: 1px;
 	border-style: solid;
 	border-radius: 4px;
 	border-color: #428BCA;
@@ -35,6 +37,7 @@ form {
 
 .btn-blue {
 	cursor: pointer;
+	border-width: 1px;
 	border-style: solid;
 	border-radius: 4px;
 	border-color: #428BCA;
@@ -48,6 +51,7 @@ form {
 
 .btn-white {
 	cursor: pointer;
+	border-width: 1px;
 	border-style: solid;
 	border-radius: 4px;
 	border: 1px solid #c4c4c4;
